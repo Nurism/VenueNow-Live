@@ -1,4 +1,23 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101012"><title>VenueNow | Konserter och biljetter</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script></head><body>
-<header><a class="logo" href="./"><i aria-hidden="true">∿</i>VenueNow</a><nav><a href="#program">Konserter</a><button id="tickets">Mina biljetter</button><button id="basket">Kundvagn <b id="count">0</b></button></nav></header>
-<main><section class="hero"><div><span class="tag">I RAMPLJUSET</span><h1>Nocturne<span>After Hours</span></h1><p>12 december · Fållan, Stockholm</p><button class="cta" data-open="nocturne">Visa biljetter</button></div><small>ELEKTRONISKT / LIVE</small></section>
-<section id="program"><div class="sectionhead"><div><p class="kicker">KONSERTKALENDERN</p><h2>På scen snart<span>.</span></h2></div><label class="search">⌕ <input id="query" type="search" placeholder="Sök artist, stad eller scen" aria-label="Sök artist, stad eller scen"></label></div><div id="filters" role="group" aria-label="Filtrera på genre"></div><div id="grid"></div></section></main><footer><strong>VenueNow</strong><span>Demobutik · Fiktiva konserter och biljetter</span></footer><dialog aria-labelledby="heading"><button class="close" aria-label="Stäng">×</button><div id="panel"></div></dialog></body></html>
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101012"><title>VenueNow | Konserter och biljetter</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script><link rel="stylesheet" href="catalog.css"><script defer src="catalog.js"></script></head><body>
+<header><a class="logo" href="./"><i aria-hidden="true">∿</i>VenueNow</a><nav><a href="#stockholm">Konserter</a><button id="tickets">Mina biljetter</button><button id="basket">Kundvagn <b id="count">0</b></button><a id="account" href="https://venuenow-live-nur.retrokiwi18.chatgpt.site/signin-with-chatgpt?return_to=%2F">Logga in</a><button id="manage" hidden>Hantera artister</button></nav></header>
+<main>
+<section id="stockholm" aria-labelledby="stockholm-title">
+  <div class="sectionhead"><div><p class="kicker">KONSERTKALENDERN</p><h1 id="stockholm-title">Live i Stockholm<span>.</span></h1></div>
+  <label class="search">⌕ <input type="search" id="artist-search" placeholder="Sök artist, genre eller scen" aria-label="Sök artist, genre eller scen"></label></div>
+  <div id="artist-grid" aria-live="polite"><p>Hämtar konserter…</p></div>
+</section><section class="hero"><div><span class="tag">DEMOKONSERT</span><h1>Nocturne<span>After Hours</span></h1><p>12 december · Fållan, Stockholm</p><button class="cta" data-open="nocturne">Visa biljetter</button></div><small>ELEKTRONISKT / LIVE</small></section>
+<section id="program"><div class="sectionhead"><div><p class="kicker">PROVA BILJETTBOKNING</p><h2>Demoprogram<span>.</span></h2></div><label class="search">⌕ <input id="query" type="search" placeholder="Sök artist, stad eller scen" aria-label="Sök artist, stad eller scen"></label></div><div id="filters" role="group" aria-label="Filtrera på genre"></div><div id="grid"></div></section></main><footer><strong>VenueNow</strong><span>Riktiga biljetter säljs via arrangörerna</span></footer><dialog id="booking-dialog" aria-labelledby="heading"><button class="close" aria-label="Stäng">×</button><div id="panel"></div></dialog><dialog id="artist-dialog" aria-labelledby="manage-title">
+  <form method="dialog"><button class="close" aria-label="Stäng artistpanelen">×</button></form>
+  <h2 id="manage-title">Hantera artister</h2>
+  <label>Välj artist <select id="select-artist"></select></label>
+  <form id="edit-artist">
+    <label>Artist<input name="name" required maxlength="120"></label>
+    <div class="form-row"><label>Genre<input name="genre" required maxlength="60"></label><label>Datum<input name="date" type="date" required></label></div>
+    <div class="form-row"><label>Spelplats<input name="venue" required maxlength="120"></label><label>Stad<input name="city" required maxlength="100"></label></div>
+    <label>Beskrivning<textarea name="description" required maxlength="2400" rows="4"></textarea></label>
+    <label>Bildlänk eller lokalt bildnamn<input name="image" required maxlength="800"></label>
+    <label>Arrangörens konsertlänk<input name="url" type="url" required maxlength="800" placeholder="https://"></label>
+    <button class="cta" type="submit">Spara artist</button>
+  </form>
+  <p id="artist-status" role="status"></p>
+</dialog></body></html>

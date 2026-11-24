@@ -1,0 +1,26 @@
+[hidden]{display:none!important}
+header{height:auto;min-height:82px;padding-block:13px}
+header nav{justify-content:flex-end;flex-wrap:wrap;row-gap:.35rem}
+header nav #account{display:inline-block;color:#d8c4ff}
+header nav #basket{border:1px solid #454249;border-radius:30px;padding:8px 15px}
+header nav #manage{background:#c6aaff;border-radius:7px;color:#181220;padding:8px 12px;font-weight:700}
+#stockholm{padding-block:2.4rem 3.5rem}
+#stockholm h1{font-size:clamp(2.65rem,5vw,4.4rem);line-height:1.05;letter-spacing:-.065em;margin:0}
+#stockholm h1 span{color:#c6aaff}
+#artist-grid{margin-top:1.6rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+.artist-card{border:1px solid #37343d;background:#1a191d;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.artist-card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#241b30}
+.artist-copy{padding:1rem;display:flex;flex:1;flex-direction:column;align-items:flex-start}
+.artist-copy h2{margin:.45rem 0 .6rem;font-size:clamp(1.45rem,2.3vw,2rem);letter-spacing:-.045em}
+.artist-copy p{margin:0 0 .65rem}
+.artist-copy .description{color:#d2cbd9}
+.artist-copy small a{text-decoration:underline;color:#c9c1cf}
+.artist-copy .ticket{display:block;margin-top:auto;padding-top:1rem;color:#d1b9ff;font-weight:700}
+#edit-artist{margin-top:1rem;display:grid;gap:.75rem}
+#edit-artist label{display:grid;gap:.3rem;font-size:.9rem;min-width:0}
+#edit-artist input,#edit-artist textarea{width:100%;font:inherit;background:#18161a;color:inherit;border:1px solid #62596b;border-radius:7px;padding:8px}
+#edit-artist .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+#artist-dialog select{max-width:100%}
+#artist-status{margin-bottom:0;color:#d8c4ff}
+@media(max-width:760px){#artist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}header{align-items:flex-start}}
+@media(max-width:520px){#artist-grid{grid-template-columns:1fr}header nav{column-gap:.2rem}}

@@ -7,7 +7,7 @@ const events = [
 ];
 const $ = selector => document.querySelector(selector);
 const findEvent = id => events.find(event => event.id === id);
-const dialog = $('dialog');
+const dialog = $('#booking-dialog');
 const panel = $('#panel');
 const key = 'venueNowBookings.v1';
 let state = {cart:{}, orders:[]};
@@ -59,6 +59,7 @@ document.addEventListener('change',ev=>{if(ev.target.dataset.qty)updateQuantity(
 document.addEventListener('click',ev=>{
   const b=ev.target.closest('button');
   if(!b)return;
+  if(b.closest('#artist-dialog'))return;
   if(b.className==='close')dialog.close();
   else if(b.matches('[data-browse]')){dialog.close();$('#program').scrollIntoView();}
   else if(b.className==='chip'){genre=b.textContent;render();}
