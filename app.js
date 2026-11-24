@@ -1,9 +1,9 @@
 'use strict';
 const events = [
-  {id:'iris', name:'Iris Vale', genre:'Indie', day:4, month:'DEC', city:'Stockholm', venue:'Debaser', price:295, time:'20.00', description:'Gitarrdriven indie och nära sång på en intim klubbscen.'},
-  {id:'echo', name:'Echo System', genre:'Elektroniskt', day:5, month:'DEC', city:'Göteborg', venue:'Pustervik', price:345, time:'21.00', description:'Analoga syntar och pulserande bas i ett sammanhängande liveset.'},
-  {id:'atlas', name:'Atlas North', genre:'Rock', day:11, month:'DEC', city:'Malmö', venue:'Plan B', price:325, time:'19.30', description:'Alternativ rock med stora refränger och dubbla gitarrer.'},
-  {id:'nocturne', name:'Nocturne After Hours', genre:'Elektroniskt', day:12, month:'DEC', city:'Stockholm', venue:'Fållan', price:395, time:'21.00', description:'En kväll med djupa basgångar, svepande ljus och ett liveset byggt för dansgolvet.'}
+  {id:'iris', name:'Iris Vale', genre:'Indie', day:4, city:'Stockholm', venue:'Debaser', price:295, time:'20.00', description:'Gitarrdriven indie och nära sång på en intim klubbscen.'},
+  {id:'echo', name:'Echo System', genre:'Elektroniskt', day:5, city:'Göteborg', venue:'Pustervik', price:345, time:'21.00', description:'Analoga syntar och pulserande bas i ett sammanhängande liveset.'},
+  {id:'atlas', name:'Atlas North', genre:'Rock', day:11, city:'Malmö', venue:'Plan B', price:325, time:'19.30', description:'Alternativ rock med stora refränger och dubbla gitarrer.'},
+  {id:'nocturne', name:'Nocturne After Hours', genre:'Elektroniskt', day:12, city:'Stockholm', venue:'Fållan', price:395, time:'21.00', description:'En kväll med djupa basgångar, svepande ljus och ett liveset byggt för dansgolvet.'}
 ];
 const $ = selector => document.querySelector(selector);
 const findEvent = id => events.find(event => event.id === id);
@@ -28,8 +28,18 @@ function save(next){
 function render(){
   const query=$('#query').value.trim().toLocaleLowerCase('sv');
   const visible=events.filter(e=>(genre==='Alla'||e.genre===genre) && [e.name,e.city,e.venue].join(' ').toLocaleLowerCase('sv').includes(query));
-  $('#grid').innerHTML=visible.map(e=>`<button class="card" data-open="${e.id}"><div class="art"><img src="${e.id}.webp" alt=""><span class="date"><strong>${e.day}</strong>${e.month}</span></div><div class="info"><span class="genre">${e.genre.toUpperCase()}</span><h3>${e.name}</h3><p>${e.venue} · ${e.city}</p><span class="price">${e.price} kr <em>Visa biljetter</em></span></div></button>`).join('') || '<p>Inga konserter matchar din sökning. <button class="remove" id="reset">Rensa filter</button></p>';
-  document.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===genre)));
+  const grid = $('#grid');
+  grid.replaceChildren(...visible.map(event => {
+    const details = {...event, image: event.id + '.webp', date: '2026-12-' + String(event.day).padStart(2,'0')};
+    return VenueArtistCard.build(details, {
+      headingLevel: 'h3',
+      label: 'Boka demobiljetter',
+      note: 'Demobiljett · ' + event.price + ' kr',
+      eventId: event.id
+    });
+  }));
+  if (!visible.length) grid.innerHTML='<p>Inga konserter matchar din sökning. <button class="remove" id="reset">Rensa filter</button></p>';
+  document.querySelectorAll('#filters .chip').forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===genre)));
 }
 $('#filters').innerHTML=['Alla','Indie','Elektroniskt','Rock'].map(g=>`<button class="chip">${g}</button>`).join('');
 $('#query').oninput=render;
@@ -62,7 +72,7 @@ document.addEventListener('click',ev=>{
   if(b.closest('#artist-dialog'))return;
   if(b.className==='close')dialog.close();
   else if(b.matches('[data-browse]')){dialog.close();$('#program').scrollIntoView();}
-  else if(b.className==='chip'){genre=b.textContent;render();}
+  else if(b.matches('#filters .chip')){genre=b.textContent;render();}
   else if(b.id==='reset'){genre='Alla';$('#query').value='';render();}
   else if(b.dataset.open)detail(findEvent(b.dataset.open));
   else if(b.dataset.add)updateQuantity(b.dataset.add,(state.cart[b.dataset.add]||0)+Number($('#quantity').value));

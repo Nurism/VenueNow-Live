@@ -7,11 +7,11 @@ header nav #manage{background:#c6aaff;border-radius:7px;color:#181220;padding:8p
 #stockholm{padding-block:2.4rem 3.5rem}
 #stockholm h1{font-size:clamp(2.65rem,5vw,4.4rem);line-height:1.05;letter-spacing:-.065em;margin:0}
 #stockholm h1 span{color:#c6aaff}
-#artist-grid{margin-top:1.6rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+.artist-grid{margin-top:1.6rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
 .artist-card{border:1px solid #37343d;background:#1a191d;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
 .artist-card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#241b30}
 .artist-copy{padding:1rem;display:flex;flex:1;flex-direction:column;align-items:flex-start}
-.artist-copy h2{margin:.45rem 0 .6rem;font-size:clamp(1.45rem,2.3vw,2rem);letter-spacing:-.045em}
+.artist-copy :is(h2,h3){margin:.45rem 0 .6rem;font-size:clamp(1.45rem,2.3vw,2rem);letter-spacing:-.045em}
 .artist-copy p{margin:0 0 .65rem}
 .artist-copy .description{color:#d2cbd9}
 .artist-copy small a{text-decoration:underline;color:#c9c1cf}
@@ -22,5 +22,18 @@ header nav #manage{background:#c6aaff;border-radius:7px;color:#181220;padding:8p
 #edit-artist .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 #artist-dialog select{max-width:100%}
 #artist-status{margin-bottom:0;color:#d8c4ff}
-@media(max-width:760px){#artist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}header{align-items:flex-start}}
-@media(max-width:520px){#artist-grid{grid-template-columns:1fr}header nav{column-gap:.2rem}}
+@media(max-width:760px){.artist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}header{align-items:flex-start}}
+@media(max-width:520px){.artist-grid{grid-template-columns:1fr}header nav{column-gap:.2rem}}
+
+#luger{padding:2.5rem 0 3rem;border-block:1px solid #37343d}
+#luger-title{margin-bottom:.8rem}
+.luger-intro{max-width:43ch;margin:0}
+#luger-status{margin:1.2rem 0 .75rem;scroll-margin-top:1rem}
+#luger-grid{margin-top:.75rem}
+#luger-grid img{aspect-ratio:5/4;object-position:center 30%}
+.artist-copy button.ticket{padding-inline:0;text-align:left}
+.artist-copy .artist-note{margin-top:auto;color:#e0cfff;font-weight:650}
+.artist-copy .artist-note + .ticket{margin-top:0;padding-top:.25rem}
+.luger-pagination{display:flex;align-items:center;justify-content:center;gap:.8rem;margin:1.5rem 0;flex-wrap:wrap}
+.luger-source{display:inline-block;margin-top:1.1rem;text-decoration:underline;color:#d1b9ff}
+@media(max-width:760px){header nav a[href="#luger"]{display:inline-block}}

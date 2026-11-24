@@ -1,12 +1,25 @@
-<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101012"><title>VenueNow | Konserter och biljetter</title><link rel="stylesheet" href="style.css"><script defer src="app.js"></script><link rel="stylesheet" href="catalog.css"><script defer src="catalog.js"></script></head><body>
-<header><a class="logo" href="./"><i aria-hidden="true">∿</i>VenueNow</a><nav><a href="#stockholm">Konserter</a><button id="tickets">Mina biljetter</button><button id="basket">Kundvagn <b id="count">0</b></button><a id="account" href="https://venuenow-live-nur.retrokiwi18.chatgpt.site/signin-with-chatgpt?return_to=%2F">Logga in</a><button id="manage" hidden>Hantera artister</button></nav></header>
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101012"><title>VenueNow | Konserter och biljetter</title><link rel="stylesheet" href="style.css"><script defer src="artist-card.js"></script><script defer src="app.js"></script><link rel="stylesheet" href="catalog.css"><script defer src="catalog.js"></script><script defer src="luger.js"></script></head><body>
+<header><a class="logo" href="./"><i aria-hidden="true">∿</i>VenueNow</a><nav><a href="#stockholm">Konserter</a><a href="#luger">Lugers artister</a><a href="#program">Demobiljetter</a><button id="tickets">Mina biljetter</button><button id="basket">Kundvagn <b id="count">0</b></button><a id="account" href="https://venuenow-live-nur.retrokiwi18.chatgpt.site/signin-with-chatgpt?return_to=%2F">Logga in</a><button id="manage" hidden>Hantera artister</button></nav></header>
 <main>
 <section id="stockholm" aria-labelledby="stockholm-title">
   <div class="sectionhead"><div><p class="kicker">KONSERTKALENDERN</p><h1 id="stockholm-title">Live i Stockholm<span>.</span></h1></div>
   <label class="search">⌕ <input type="search" id="artist-search" placeholder="Sök artist, genre eller scen" aria-label="Sök artist, genre eller scen"></label></div>
-  <div id="artist-grid" aria-live="polite"><p>Hämtar konserter…</p></div>
-</section><section class="hero"><div><span class="tag">DEMOKONSERT</span><h1>Nocturne<span>After Hours</span></h1><p>12 december · Fållan, Stockholm</p><button class="cta" data-open="nocturne">Visa biljetter</button></div><small>ELEKTRONISKT / LIVE</small></section>
-<section id="program"><div class="sectionhead"><div><p class="kicker">PROVA BILJETTBOKNING</p><h2>Demoprogram<span>.</span></h2></div><label class="search">⌕ <input id="query" type="search" placeholder="Sök artist, stad eller scen" aria-label="Sök artist, stad eller scen"></label></div><div id="filters" role="group" aria-label="Filtrera på genre"></div><div id="grid"></div></section></main><footer><strong>VenueNow</strong><span>Riktiga biljetter säljs via arrangörerna</span></footer><dialog id="booking-dialog" aria-labelledby="heading"><button class="close" aria-label="Stäng">×</button><div id="panel"></div></dialog><dialog id="artist-dialog" aria-labelledby="manage-title">
+  <div class="artist-grid" id="artist-grid" aria-live="polite"><p>Hämtar konserter…</p></div>
+</section><section id="luger" aria-labelledby="luger-title">
+  <div class="sectionhead">
+    <div><h2 id="luger-title">Lugers artister<span>.</span></h2><p class="muted luger-intro">Artister som Luger representerar, med korta presentationer och utdrag från deras officiella profiler.</p></div>
+    <label class="search">⌕ <input type="search" id="luger-search" placeholder="Sök i Lugers artistregister" aria-label="Sök i Lugers artistregister"></label>
+  </div>
+  <p id="luger-status" class="muted" role="status">Hämtar artister…</p>
+  <div id="luger-grid" class="artist-grid"></div>
+  <div class="luger-pagination" hidden>
+    <button class="chip" id="luger-prev">Föregående</button>
+    <span id="luger-page"></span>
+    <button class="chip" id="luger-next">Nästa</button>
+  </div>
+  <a class="luger-source" href="https://luger.se/artister/">Lugers officiella artistregister</a>
+</section>
+<section id="program"><div class="sectionhead"><div><p class="kicker">PROVA BILJETTBOKNING</p><h2>Demoprogram<span>.</span></h2></div><label class="search">⌕ <input id="query" type="search" placeholder="Sök artist, stad eller scen" aria-label="Sök artist, stad eller scen"></label></div><div id="filters" role="group" aria-label="Filtrera på genre"></div><div class="artist-grid" id="grid"></div></section></main><footer><strong>VenueNow</strong><span>Riktiga biljetter säljs via arrangörerna</span></footer><dialog id="booking-dialog" aria-labelledby="heading"><button class="close" aria-label="Stäng">×</button><div id="panel"></div></dialog><dialog id="artist-dialog" aria-labelledby="manage-title">
   <form method="dialog"><button class="close" aria-label="Stäng artistpanelen">×</button></form>
   <h2 id="manage-title">Hantera artister</h2>
   <label>Välj artist <select id="select-artist"></select></label>

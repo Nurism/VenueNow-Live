@@ -2,51 +2,23 @@
   const host = 'https://venuenow-live-nur.retrokiwi18.chatgpt.site';
   const grid = document.getElementById('artist-grid');
   const search = document.getElementById('artist-search');
-  const dateFormat = new Intl.DateTimeFormat('sv-SE',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
   let artists = [], version;
 
-  function element(tag, value, cls) {
-    const el = document.createElement(tag);
-    el.textContent = value || '';
-    if (cls) el.className = cls;
-    return el;
-  }
-
   function card(artist) {
-    const article = element('article', '', 'artist-card');
-    const img = document.createElement('img');
-    img.alt = artist.name;
-    img.loading = 'lazy';
-    img.onerror = () => { img.onerror = null; img.src = './nocturne.webp'; img.alt = ''; };
-    img.src = new URL(artist.image, host).href;
-    const content = element('div', '', 'artist-copy');
-    const time = element('time', dateFormat.format(new Date(artist.date + 'T12:00:00Z')));
-    time.dateTime = artist.date;
-    content.append(element('p',artist.genre,'genre'),element('h2',artist.name),time,
-      element('p',artist.venue + ' · ' + artist.city,'muted'),element('p',artist.description,'description'));
-    if (artist.credit) {
-      const credit = element('a', 'Bild: ' + artist.credit);
-      credit.href = artist.creditUrl;
-      const label = document.createElement('small');
-      label.append(credit);
-      content.append(label);
-    }
     const url = new URL(artist.url);
-    if (url.protocol === 'https:') {
-      const source = url.hostname === 'luger.se' ? 'Luger' : url.hostname === 'billetto.se' ? 'Billetto' : 'arrangören';
-      const link = element('a','Biljetter hos ' + source,'ticket');
-      link.href = url.href;
-      content.append(link);
-    }
-    article.append(img,content);
-    return article;
+    const source = url.hostname === 'luger.se' ? 'Luger' : url.hostname === 'billetto.se' ? 'Billetto' : 'arrangören';
+    return VenueArtistCard.build(artist, {
+      imageBase: host,
+      link: url.href,
+      label: 'Biljetter hos ' + source
+    });
   }
 
   function render() {
     const q = search.value.trim().toLocaleLowerCase('sv');
     const visible = artists.filter(a => [a.name,a.city,a.venue,a.genre].join(' ').toLocaleLowerCase('sv').includes(q));
     grid.replaceChildren(...visible.map(card));
-    if (!visible.length) grid.append(element('p','Inga konserter matchar din sökning.'));
+    if (!visible.length) grid.append(VenueArtistCard.element('p','Inga konserter matchar din sökning.'));
   }
 
   async function refresh() {
